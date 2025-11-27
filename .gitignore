@@ -1,0 +1,25 @@
+# Ignore Terraform variable files containing secrets
+*.tfvars
+
+# Terraform
+**/.terraform/ 
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
+crash.log
+
+# Python
+__pycache__/
+*.pyc
+
+# VSCode and OS
+.vscode/
+.DS_Store
+
+
+# Data files to always ignore
+data/
+*.csv
+*.json
+*.jsonl
