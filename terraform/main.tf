@@ -56,3 +56,22 @@ module "glue_catalog" {
   processed_bucket_name = module.s3.processed_bucket_name
   glue_role_arn         = module.glue_service_role.glue_role_arn
 }
+
+
+module "lambda_kinesis_consumer" {
+  source = "./modules/lambda_kinesis_consumer"
+
+  lambda_function_name = "airline-dev-flightevents-consumer"
+  kinesis_stream_arn   = module.kinesis_stream.flight_events_arn
+  lambda_zip_path      = "${path.module}/lambda_artifacts/lambda_kinesis_consumer.zip"
+
+  alerts_topic_arn = module.sns_sqs.alerts_topic_arn
+  alerts_queue_arn = module.sns_sqs.alerts_queue_arn
+  alerts_queue_url = module.sns_sqs.alerts_queue_url
+}
+
+
+
+module "sns_sqs" {
+  source = "./modules/sns_sqs"
+}
